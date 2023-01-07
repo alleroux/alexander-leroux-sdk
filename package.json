@@ -1,0 +1,23 @@
+{
+  "name": "alexander-leroux-sdk",
+  "version": "1.0.0",
+  "description": "An SDK for accessing the Lord of the Rings API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alleroux/alexander-leroux-sdk.git"
+  },
+  "keywords": [
+    "API",
+    "lordoftherings"
+  ],
+  "author": "Alexander Leroux",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alleroux/alexander-leroux-sdk/issues"
+  },
+  "homepage": "https://github.com/alleroux/alexander-leroux-sdk#readme"
+}
