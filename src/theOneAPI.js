@@ -1,4 +1,4 @@
-import Secrets from 'secret.json';
+import Secrets from '../secret.json';
 import axios from "axios";
 
 class SimpleAPICall {
@@ -23,30 +23,28 @@ class SimpleAPICall {
             throw new Error("No access token found");
         }
 
+        //need to authenticate with the one server for most routes
         const headers = {
-            'Authorization': 'Bearer' + this.accessToken
+            'Authorization': 'Bearer ' + this.accessToken
         };
 
-        const callUrl = this.baseURL + route;
-        const method = 'GET';
+        const url = this.baseURL + route;
+        const method = 'get';
 
-        return axios(callUrl, {
+        const response = await axios({
+            url,
             method,
             headers
-        }).then(response => {
-            if (response.status >= 400) {
-                // check for 4XX, 5XX, wtv
-                return Promise.reject({
-                    status: response.status,
-                    message: response.statusText,
-                    body: response.data
-                });
-            }
-            if (response.status >= 200 && response.status <= 202) {
-                return response.data;
-            }
-            return {};
         });
+
+        if (response.status >= 400) {
+            // check for 4XX, 5XX, wtv
+            throw new Error(response.data);
+        }
+        if (response.status >= 200 && response.status <= 202) {
+            return response.data;
+        }
+        return {};
     }
 }
 
@@ -65,9 +63,18 @@ class TheOneAPISDK {
      * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with the requested
      * data or an Error with the problem.
      */
-
     getMovie(movieId) {
-        const route = `movie/{movieId}`;
+        const route = `movie/${movieId}`;
+        return this.api.send(route);
+    }
+
+    /**
+     * Fetch a single movie from the API
+     * @return {Promise} - Returns a Promise that, when fulfilled, will either return a JSON Object with the requested
+     * data or an Error with the problem.
+     */
+    getMovies() {
+        const route = `movie`;
         return this.api.send(route);
     }
 }

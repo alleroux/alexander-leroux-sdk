@@ -1,6 +1,6 @@
 # The One API SDK
 This is a JavaScript SDK for the purpose of gaining access to The One API located at https://the-one-api.dev/.
-The SDK uses Axios to make requests to the API and returns a JavaScript Promise containing the requested data or an error.
+The SDK uses Axios to make requests to the API and returns the result of the request as an object.  You should use async/await syntax to capture the value of the response.
 
 ## Requirements
 
@@ -33,3 +33,6 @@ theOneAPI.getMovie("theMovieId")
 ## Available methods
 - `getMovie(movieId)`
 
+## API Documentation
+
+API Documentation created via JSDoc is available in the `out` directory.
